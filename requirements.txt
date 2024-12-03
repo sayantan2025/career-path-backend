@@ -3,3 +3,4 @@ flask-cors
 spacy
 pymongo
 python-dotenv
+gunicorn
