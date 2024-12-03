@@ -4,6 +4,14 @@ import spacy
 from pymongo import MongoClient
 from dotenv import load_dotenv
 import os
+from spacy.cli import download
+# Load spaCy model
+try:
+    nlp = spacy.load("en_core_web_sm")
+except OSError:
+    download("en_core_web_sm")
+    nlp = spacy.load("en_core_web_sm")
+
 
 # Load environment variables from .env
 load_dotenv()
@@ -15,8 +23,6 @@ mongo_uri = os.getenv("MONGO_URI")
 app = Flask(__name__)
 CORS(app)
 
-# Load spaCy model
-nlp = spacy.load("en_core_web_sm")
 
 # Initialize MongoDB connection
 client = MongoClient(mongo_uri)
